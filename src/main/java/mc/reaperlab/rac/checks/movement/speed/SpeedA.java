@@ -1,4 +1,4 @@
-package mc.reaperlab.rac.checks.movement;
+package mc.reaperlab.rac.checks.movement.speed;
 
 import mc.reaperlab.rac.RAC;
 import mc.reaperlab.rac.checks.Check;
@@ -17,16 +17,16 @@ public class SpeedA extends Check {
 
     @Override
     public CheckReturn onMoveEvent(PlayerMoveEvent event) {
-        User user = RAC.INSTANCE.getUser(event.getPlayer());
-        if (!user.onGround()) return CheckReturn.PASSED;
+        User user = RAC.getUser(event.getPlayer());
+        if (!user.onGround()) return new CheckReturn(true, "");
 
         double dist = event.getFrom().distance(Objects.requireNonNull(event.getTo()));
 
-        if (dist > 0.6475837678752038) {
-            return CheckReturn.FAILED;
+        if (dist > 0.8 && (event.getFrom().getY() - event.getTo().getY() == 0)) {
+            return new CheckReturn(false, "Distance = " + String.valueOf(dist));
         }
 
         super.onMoveEvent(event);
-        return CheckReturn.PASSED;
+        return new CheckReturn(true, "");
     }
 }

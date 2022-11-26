@@ -1,6 +1,11 @@
 package mc.reaperlab.rac.checks;
 
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerVelocityEvent;
+import org.checkerframework.checker.units.qual.C;
 
 public class Check {
 
@@ -26,6 +31,9 @@ public class Check {
         return checkType;
     }
 
-    public CheckReturn onMoveEvent(PlayerMoveEvent event) {return CheckReturn.PASSED;}
+    public CheckReturn onAttackEvent(EntityDamageByEntityEvent event) {return new CheckReturn(true, "");}
+    public CheckReturn onMoveEvent(PlayerMoveEvent event) {return new CheckReturn(true, "");}
+    public CheckReturn onVelocityEvent(PlayerVelocityEvent ev) {return new CheckReturn(true, "");}
+    public CheckReturn onUpdateEvent(PlayerEvent event) {return new CheckReturn(true, "");}
 
 }
