@@ -17,6 +17,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  text-align: center;
   margin: auto;
   width: 50%;
   font-family: $heading-fonts;
@@ -25,6 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p, ul, ol, table, pre, dl {
+  text-align: center;
   margin: auto;
   width: 50%;
 }
