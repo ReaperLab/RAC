@@ -1,0 +1,15 @@
+# SEO Values
+title: RAC
+tagline: The Anticheat to detect movement checks ...
+description: The Anticheat to detect movement checks ...
+
+# Google Analytics ID
+google_analytics:
+
+remote_theme: "dracula/gh-pages"
+
+sass:
+    style: compressed
+
+plugins:
+  - jekyll-seo-tag
