@@ -1,4 +1,0 @@
-
-
-# RAC
-Reaper AntiCheat
