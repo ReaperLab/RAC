@@ -3,4 +3,4 @@ Reaper AntiCheat
 
 ## License
 
-[MIT License](./LICENSE)
+[MIT License](./LICENSE.md)
