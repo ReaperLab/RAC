@@ -1,0 +1,8 @@
+name: RAC
+version: '${version}'
+main: mc.reaperlab.rac.RAC
+api-version: 1.19
+prefix: RAC
+authors: [ ReaperLab ]
+description: Reaper Anticheat
+website: https://reaperlab.github.io/RAC/
