@@ -9,10 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffectType;
 
-public class JumpA extends Check {
+public class JumpB extends Check {
 
-    public JumpA() {
-        super("Jump", "A", CheckType.MOVEMENT);
+    public JumpB() {
+        super("Jump", "B", CheckType.MOVEMENT);
     }
 
     @Override
@@ -21,8 +21,8 @@ public class JumpA extends Check {
 
         float motionY = (float) (event.getTo().getY() - event.getFrom().getY());
 
-        if (user.onGround() && motionY > 0.44 + getMovementMod(user.getPlayer())) {
-            return new CheckReturn(false, "High jump");
+        if (!user.onGround() && motionY > 0.36 + getMovementMod(user.getPlayer())) {
+            return new CheckReturn(false, "Air jump");
         }
 
         super.onMoveEvent(event);

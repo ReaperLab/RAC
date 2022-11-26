@@ -16,6 +16,7 @@ public class CheckManager {
         addCheck(new FlyB());
 
         addCheck(new JumpA());
+        addCheck(new JumpB());
 
         addCheck(new SpeedA());
         addCheck(new SpeedB());

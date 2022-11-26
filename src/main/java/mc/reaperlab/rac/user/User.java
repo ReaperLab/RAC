@@ -8,6 +8,7 @@ public class User {
 
     private Player player;
     private boolean damagedLast = false;
+    public int flags = 0;
     public int CPS = 0;
     public int floatTime = 0;
     public int glideTime = 0;
@@ -29,12 +30,17 @@ public class User {
 
     public boolean onGround() {
         return !(player.getLocation().subtract(0,0.25,0).getBlock().isEmpty()
-                && player.getLocation().subtract(0,0.25,0.25).getBlock().isEmpty()
-                && player.getLocation().subtract(0.25,0.25,0).getBlock().isEmpty()
-                && player.getLocation().subtract(-0.25,0.25,0).getBlock().isEmpty()
-                && player.getLocation().subtract(0, 0.25, -0.25).getBlock().isEmpty()
-                && player.getLocation().subtract(-0.25, 0.25, -0.25).getBlock().isEmpty()
-                && player.getLocation().subtract(0.25, 0.25, 0.25).getBlock().isEmpty());
+                && player.getLocation().subtract(0,0.25,1).getBlock().isEmpty()
+                && player.getLocation().subtract(0,0.25,-1).getBlock().isEmpty()
+                && player.getLocation().subtract(1,0.25,0).getBlock().isEmpty()
+                && player.getLocation().subtract(-1,0.25,0).getBlock().isEmpty()
+                && player.getLocation().subtract(1,0.25,1).getBlock().isEmpty()
+                && player.getLocation().subtract(-1,0.25,-1).getBlock().isEmpty()
+                && player.getLocation().subtract(1,0.25,-1).getBlock().isEmpty()
+                && player.getLocation().subtract(-1,0.25,1).getBlock().isEmpty()
+                && player.getLocation().subtract(-1,0.25,1).getBlock().isEmpty()
+                && player.getLocation().subtract(1,0.25,-1).getBlock().isEmpty()
+        );
     }
 
     public boolean wasDamagedLast() {

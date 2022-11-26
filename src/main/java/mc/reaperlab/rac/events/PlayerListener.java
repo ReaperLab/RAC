@@ -5,12 +5,12 @@ import mc.reaperlab.rac.checks.Check;
 import mc.reaperlab.rac.checks.CheckReturn;
 import mc.reaperlab.rac.checks.CheckType;
 import mc.reaperlab.rac.user.User;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerVelocityEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.*;
 
 public class PlayerListener implements Listener {
 
@@ -21,28 +21,36 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent ev) {
-        RAC.Users.remove(new User(ev.getPlayer()));
+        RAC.Users.remove(RAC.getUser(ev.getPlayer()));
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerMoveEvent ev) {
-        User user = RAC.getUser(ev.getPlayer());
-        for (Check check : RAC.checkManager.getChecks()) {
-            CheckReturn checkReturn = check.onMoveEvent(ev);
-            if (!checkReturn.isPassed()) {
-                user.getPlayer().sendMessage(check.getName() + " " + check.getType() + " | " + checkReturn.reason);
-            }
+    public void onEntityAttacked(EntityDamageByEntityEvent ev) {
+        if (ev.getEntity() instanceof Player) {
+            RAC.getUser((Player) ev.getEntity()).setDamagedLast(true);
         }
     }
 
     @EventHandler
-    public void onPlayerVelocity(PlayerVelocityEvent ev) {
+    public void onPlayerMove(PlayerMoveEvent ev) {
         User user = RAC.getUser(ev.getPlayer());
+        String RED = ChatColor.RED.toString();
+        String BOLD = ChatColor.BOLD.toString();
+        String GRAY = ChatColor.GRAY.toString();
         for (Check check : RAC.checkManager.getChecks()) {
-            CheckReturn checkReturn = check.onVelocityEvent(ev);
-            if (!checkReturn.isPassed()) {
-                user.getPlayer().sendMessage(check.getName() + " " + check.getType() + " | " + checkReturn.reason);
+            CheckReturn checkReturn = check.onMoveEvent(ev);
+            if (!checkReturn.isPassed() && !user.wasDamagedLast()) {
+                RAC.verbose(check.getName() + " " + check.getType() + GRAY + " [" + checkReturn.reason + GRAY + "]", user);
+                user.flags++;
             }
+        }
+        user.setDamagedLast(false);
+        if (user.flags > 3) {
+            user.flags = 0;
+            user.getPlayer().kickPlayer(
+                    RED + BOLD + "RAC" +
+                            "\n" + RED + "   Unfair Advantage"
+            );
         }
     }
 }

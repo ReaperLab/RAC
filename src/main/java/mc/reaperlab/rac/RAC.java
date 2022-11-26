@@ -3,6 +3,7 @@ package mc.reaperlab.rac;
 import mc.reaperlab.rac.checks.CheckManager;
 import mc.reaperlab.rac.events.PlayerListener;
 import mc.reaperlab.rac.user.User;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,6 +34,14 @@ public final class RAC extends JavaPlugin {
             if (user.getPlayer() == player || user.getPlayer().getUniqueId().equals(player.getUniqueId()))
                 return user;
         return null;
+    }
+
+    public static void verbose(String message, User user) {
+        String RED = ChatColor.RED.toString();
+        String BOLD = ChatColor.BOLD.toString();
+        String GRAY = ChatColor.GRAY.toString();
+        String GOLD = ChatColor.GOLD.toString();
+        user.getPlayer().sendMessage(GRAY + "[" + RED + BOLD + "RAC" + GRAY + "] " + GOLD + message);
     }
 
 }
