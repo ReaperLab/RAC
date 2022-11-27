@@ -5,33 +5,30 @@ import mc.reaperlab.rac.checks.Check;
 import mc.reaperlab.rac.checks.CheckReturn;
 import mc.reaperlab.rac.checks.CheckType;
 import mc.reaperlab.rac.user.User;
-import org.bukkit.Material;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import java.util.Objects;
+public class FlyC extends Check {
 
-public class FlyA extends Check {
-
-    public FlyA() {
-        super("Fly", "A", CheckType.MOVEMENT);
+    public FlyC() {
+        super("Fly", "C", CheckType.MOVEMENT);
     }
 
     @Override
     public CheckReturn onMoveEvent(PlayerMoveEvent event) {
         User user = RAC.getUser(event.getPlayer());
         if (user.onGround()) {
-            user.floatTime = 0;
+            user.upTime = 0;
             return new CheckReturn(true, "");
         }
 
         double dist = Math.abs(event.getFrom().getY() - event.getTo().getY());
 
-        if (dist < 0.1 && dist > -0.1 && user.getPlayer().getLocation().subtract(0,0.25,0).getBlock().getType() != Material.SLIME_BLOCK) {
-            user.floatTime++;
-            if (user.floatTime > 5)
-                return new CheckReturn(false, "Floating for too long");
+        if (dist > 0) {
+            if (user.upTime++ > 20)
+                return new CheckReturn(false, "Going up for too long");
         } else {
-            user.floatTime = 0;
+            if (user.upTime > 1)
+                user.upTime--;
         }
 
         super.onMoveEvent(event);

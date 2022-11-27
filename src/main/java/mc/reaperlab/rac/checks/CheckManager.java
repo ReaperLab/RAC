@@ -1,6 +1,7 @@
 package mc.reaperlab.rac.checks;
 
 import mc.reaperlab.rac.checks.movement.fly.*;
+import mc.reaperlab.rac.checks.movement.gui.*;
 import mc.reaperlab.rac.checks.movement.jump.*;
 import mc.reaperlab.rac.checks.movement.speed.*;
 
@@ -8,20 +9,23 @@ import java.util.ArrayList;
 
 public class CheckManager {
 
-    private ArrayList<Check> Checks = new ArrayList<>();
+    private final ArrayList<Check> Checks = new ArrayList<>();
 
     public CheckManager() {
 
         addCheck(new FlyA());
         addCheck(new FlyB());
+        addCheck(new FlyC());
+
+        addCheck(new GuiA());
 
         addCheck(new JumpA());
         addCheck(new JumpB());
+        addCheck(new JumpC());
 
         addCheck(new SpeedA());
         addCheck(new SpeedB());
         addCheck(new SpeedC());
-
 
     }
 

@@ -39,10 +39,12 @@ public class SpeedC extends Check {
         float returnVal = 0;
         if (player.hasPotionEffect(PotionEffectType.SPEED))
             returnVal += 0.15f;
-        if (player.isBlocking())
-            returnVal -= 0.25f;
+        if (player.isBlocking() && !player.getLocation().subtract(0,0.25,0).getBlock().isEmpty())
+            returnVal -= 0.3f;
         if (player.getLocation().subtract(0,0.25,0).getBlock().getType() == Material.SLIME_BLOCK)
-            returnVal -= 0.05f;
+            returnVal -= 0.1f;
+        if (RAC.getUser(player).isBlockAbove())
+            returnVal += 0.55;
         return returnVal;
     }
 }

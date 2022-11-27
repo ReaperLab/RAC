@@ -3,8 +3,11 @@ package mc.reaperlab.rac;
 import mc.reaperlab.rac.checks.CheckManager;
 import mc.reaperlab.rac.events.PlayerListener;
 import mc.reaperlab.rac.user.User;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,6 +19,10 @@ public final class RAC extends JavaPlugin {
     public static ArrayList<User> Users = new ArrayList<User>();
 
     public static CheckManager checkManager;
+
+    public Plugin getPlugin() {
+        return this;
+    }
 
     @Override
     public void onEnable() {
@@ -43,5 +50,4 @@ public final class RAC extends JavaPlugin {
         String GOLD = ChatColor.GOLD.toString();
         user.getPlayer().sendMessage(GRAY + "[" + RED + BOLD + "RAC" + GRAY + "] " + GOLD + message);
     }
-
 }

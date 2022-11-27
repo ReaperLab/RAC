@@ -21,9 +21,9 @@ public class SpeedB extends Check {
         if (user.onGround()) return new CheckReturn(true, "");
 
         double dist = event.getFrom().distance(Objects.requireNonNull(event.getTo()));
-        double distY = Math.abs(event.getFrom().getY()-event.getTo().getY());
+        double distY = event.getTo().getY()-event.getFrom().getY();
 
-        if (dist > 0.95 && distY < 0) {
+        if (dist > .59 && distY > 0) {
             return new CheckReturn(false, "Air Distance = " + String.valueOf(dist));
         }
 

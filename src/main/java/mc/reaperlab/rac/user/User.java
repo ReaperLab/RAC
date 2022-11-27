@@ -8,6 +8,8 @@ public class User {
 
     private Player player;
     private boolean damagedLast = false;
+    public int packetsImmune = 0;
+    public int packetsInGUI = 0;
     public int flags = 0;
     public int CPS = 0;
     public int floatTime = 0;
@@ -29,17 +31,32 @@ public class User {
     }
 
     public boolean onGround() {
-        return !(player.getLocation().subtract(0,0.25,0).getBlock().isEmpty()
-                && player.getLocation().subtract(0,0.25,1).getBlock().isEmpty()
-                && player.getLocation().subtract(0,0.25,-1).getBlock().isEmpty()
-                && player.getLocation().subtract(1,0.25,0).getBlock().isEmpty()
-                && player.getLocation().subtract(-1,0.25,0).getBlock().isEmpty()
-                && player.getLocation().subtract(1,0.25,1).getBlock().isEmpty()
-                && player.getLocation().subtract(-1,0.25,-1).getBlock().isEmpty()
-                && player.getLocation().subtract(1,0.25,-1).getBlock().isEmpty()
-                && player.getLocation().subtract(-1,0.25,1).getBlock().isEmpty()
-                && player.getLocation().subtract(-1,0.25,1).getBlock().isEmpty()
-                && player.getLocation().subtract(1,0.25,-1).getBlock().isEmpty()
+        return !(player.getLocation().subtract(0,0.1,0).getBlock().isEmpty()
+                && player.getLocation().subtract(0,0.1,1).getBlock().isEmpty()
+                && player.getLocation().subtract(0,0.1,-1).getBlock().isEmpty()
+                && player.getLocation().subtract(1,0.1,0).getBlock().isEmpty()
+                && player.getLocation().subtract(-1,0.1,0).getBlock().isEmpty()
+                && player.getLocation().subtract(1,0.1,1).getBlock().isEmpty()
+                && player.getLocation().subtract(-1,0.1,-1).getBlock().isEmpty()
+                && player.getLocation().subtract(1,0.1,-1).getBlock().isEmpty()
+                && player.getLocation().subtract(-1,0.1,1).getBlock().isEmpty()
+                && player.getLocation().subtract(-1,0.1,1).getBlock().isEmpty()
+                && player.getLocation().subtract(1,0.1,-1).getBlock().isEmpty()
+        );
+    }
+
+    public boolean isBlockAbove() {
+        return !(player.getLocation().add(0,2,0).getBlock().isEmpty()
+                && player.getLocation().add(0,2,1).getBlock().isEmpty()
+                && player.getLocation().add(0,2,-1).getBlock().isEmpty()
+                && player.getLocation().add(1,2,0).getBlock().isEmpty()
+                && player.getLocation().add(-1,2,0).getBlock().isEmpty()
+                && player.getLocation().add(1,2,1).getBlock().isEmpty()
+                && player.getLocation().add(-1,2,-1).getBlock().isEmpty()
+                && player.getLocation().add(1,2,-1).getBlock().isEmpty()
+                && player.getLocation().add(-1,2,1).getBlock().isEmpty()
+                && player.getLocation().add(-1,2,1).getBlock().isEmpty()
+                && player.getLocation().add(1,2,-1).getBlock().isEmpty()
         );
     }
 
